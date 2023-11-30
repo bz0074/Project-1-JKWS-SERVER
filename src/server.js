@@ -36,7 +36,7 @@ app.post('/auth', (req, res) => {
     username: 'fakeuser',
   };
 
-  const token = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h', keyid: 'your-key-id' });
+ const token = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h', keyid: 'my-key-id-1' });
 
   res.json({ token });
 });
