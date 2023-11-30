@@ -1,22 +1,15 @@
-const crypto = require('crypto');
+const { generateKeyPairSync } = require('crypto');
+const fs = require('fs');
 
-function generateKeyPair() {
-  const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
-    modulusLength: 2048,
-    publicKeyEncoding: {
-      type: 'spki',
-      format: 'pem',
-    },
-    privateKeyEncoding: {
-      type: 'pkcs8',
-      format: 'pem',
-    },
-  });
+// Generate RSA key pair
+const { privateKey, publicKey } = generateKeyPairSync('rsa', {
+  modulusLength: 2048,
+  publicKeyEncoding: { type: 'spki', format: 'pem' },
+  privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+});
 
-  const kid = crypto.randomBytes(8).toString('hex');
-  const expiry = Date.now() + 86400000; // 24 hours in milliseconds
+// Save keys to files
+fs.writeFileSync('private-key.pem', privateKey);
+fs.writeFileSync('public-key.pem', publicKey);
 
-  return { kid, publicKey, privateKey, expiry };
-}
-
-module.exports = { generateKeyPair };
+console.log('Keys generated and saved.');
