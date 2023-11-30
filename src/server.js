@@ -1,17 +1,19 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const path = require('path'); // Add this line
 
 const app = express();
 const port = 8080;
 
-// Load keys
-const privateKey = fs.readFileSync('private-key.pem', 'utf-8');
-const publicKey = fs.readFileSync('public-key.pem', 'utf-8');
+// Load keys with correct path
+const privateKeyPath = path.join(__dirname, 'private-key.pem');
+const publicKeyPath = path.join(__dirname, 'public-key.pem');
+const privateKey = fs.readFileSync(privateKeyPath, 'utf-8');
+const publicKey = fs.readFileSync(publicKeyPath, 'utf-8');
 
 // RESTful JWKS endpoint
 app.get('/jwks', (req, res) => {
-  // Implement the JWKS endpoint logic here
   const jwks = {
     keys: [
       {
@@ -30,13 +32,12 @@ app.get('/jwks', (req, res) => {
 
 // Authentication endpoint
 app.post('/auth', (req, res) => {
-  // Implement the authentication endpoint logic here
   const user = {
     id: 1,
     username: 'fakeuser',
   };
 
- const token = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h', keyid: 'kid' });
+  const token = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h', keyid: 'your-key-id' });
 
   res.json({ token });
 });
