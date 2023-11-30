@@ -1,0 +1,27 @@
+{
+  "name": "jwks-server",
+  "version": "1.0.0",
+  "description": "A simple JWKS server for educational purposes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha",
+    "coverage": "nyc mocha"
+  },
+  "keywords": [
+    "jwks",
+    "jwt",
+    "express"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0"
+  }
+}
