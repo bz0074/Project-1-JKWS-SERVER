@@ -22,3 +22,5 @@ A simple JWKS (JSON Web Key Set) server for educational purposes. This server pr
 
 ```bash
 npm install
+npm test //to test the code
+npm run coverage //to see the coverage 
