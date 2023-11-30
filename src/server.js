@@ -18,7 +18,7 @@ app.get('/jwks', (req, res) => {
     keys: [
       {
         kty: 'RSA',
-        kid: 'your-key-id', // Replace with a unique identifier
+        kid: 'kid', // Replace with a unique identifier
         use: 'sig',
         alg: 'RS256',
         n: publicKey.split('\n').slice(1, -2).join(''), // Remove PEM headers and footers
@@ -37,7 +37,7 @@ app.post('/auth', (req, res) => {
     username: 'fakeuser',
   };
 
-  const token = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h', keyid: 'your-key-id' });
+  const token = jwt.sign({ user }, privateKey, { algorithm: 'RS256', expiresIn: '1h', keyid: 'kid' });
 
   res.json({ token });
 });
